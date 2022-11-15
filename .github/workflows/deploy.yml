@@ -1,0 +1,22 @@
+name: deploy
+run-name: ${{ github.actor }} is deploying new version of website
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Copy files
+        run: |
+          echo "${{secrets.DEPLOY_KEY}}" > ./deploy_key
+          chmod 600 ./deploy_key
+          rsync -avzr --delete \
+            -e 'ssh -i ./deploy_key -o StrictHostKeyChecking=no' \
+            --exclude ./deploy_key \
+            --exclude ./.git/ \
+            --exclude ./.github/ \
+            ./ deployer@oracle1.polipones.cz:/srv/http/kriplovihosi.cz
