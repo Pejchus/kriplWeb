@@ -337,7 +337,6 @@ ul#topnav li a.active, ul#topnav li a.active:hover {    background: #eee;  color
 
 /* footer */
 #footer { font-size:10px; text-align: center; padding-bottom:20px;}
-#footer span {display:none;}
 #footer p.show-footer {display: block; }
 #credits { font-size:80%; text-align:center;}
 }
